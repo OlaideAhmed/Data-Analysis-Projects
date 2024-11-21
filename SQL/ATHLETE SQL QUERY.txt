@@ -1,4 +1,4 @@
-```sql
+```
 For this SQL project i will be answering 10 questions from this dataset
 #I will start by introducing the table
 -- Use the appropriate database
@@ -70,3 +70,4 @@ LIMIT 1;
 SELECT COUNT(*) AS athletes_above_30
 FROM athlete_info
 WHERE age > 30;
+```
