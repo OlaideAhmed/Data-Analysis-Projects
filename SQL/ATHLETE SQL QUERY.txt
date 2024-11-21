@@ -1,4 +1,4 @@
-For this SQL project i will be answering 10 questions from this dataset
+#For this SQL project i will be answering 10 questions from this dataset
 #I will start by introducing the table
 ```sql
 -- Use the appropriate database
