@@ -1,72 +1,74 @@
 #For this SQL project i will be answering 10 questions from this dataset 
+
 #I will start by introducing the table
 ```sql
 -- Use the appropriate database
-USE hollywood_db;
+USE athletes_db;
 
 -- Show all tables in the database
 SHOW tables;
 
--- Display all records in the hollywood_db_table
-SELECT * FROM hollywood_db_table;
+-- Display all records in the athlete_info table
+SELECT * from athlete_info;
 
--- 1. What is the most popular genre based on revenue in the dataset?
-SELECT genre, SUM(worldwide_gross) AS total_gross
-FROM hollywood_db_table
-GROUP BY genre
-ORDER BY total_gross DESC
+-- 1. What is the average age of the athletes in the dataset?
+SELECT AVG(age)
+FROM athlete_info;
+
+-- 2. How many athletes in the dataset are from the United States?
+SELECT COUNT(athletes)
+FROM athlete_info
+WHERE country = 'United States';
+
+-- 3. What sport in the dataset has the most gold medals?
+SELECT sport, SUM(gold_medals) AS Total_goldmedals
+FROM athlete_info
+GROUP BY sport
+ORDER BY Total_goldmedals DESC
 LIMIT 1;
 
--- 2. How many films are produced by Lionsgate in the dataset?
-SELECT COUNT(*) AS number_of_films
-FROM hollywood_db_table
-WHERE lead_studio = 'Lionsgate';
+-- 4. How many athletes in the dataset are below the age of 30?
+SELECT COUNT(*) AS athletes_below_30
+FROM athlete_info
+WHERE age < 30;
 
--- 3. What is the film with the highest audience score in the dataset?
-SELECT film, audience_score
-FROM hollywood_db_table
-ORDER BY audience_score DESC
+-- 5. Who is the youngest and the oldest athlete in the dataset?
+
+-- Youngest athlete
+SELECT athletes, age
+FROM athlete_info
+WHERE age = (SELECT MIN(age) FROM athlete_info);
+
+-- Oldest athlete
+SELECT athletes, age
+FROM athlete_info
+WHERE age = (SELECT MAX(age) FROM athlete_info);
+
+-- 6. How many athletes in the dataset are from France?
+SELECT COUNT(*) AS athletes_from_france
+FROM athlete_info
+WHERE country = 'France';
+
+-- 7. How many athletes in the dataset participated in swimming?
+SELECT COUNT(DISTINCT athletes) AS athletes_in_swimming
+FROM athlete_info
+WHERE sport = 'Swimming';
+
+-- 8. What is the total number of medals won by athletes in the dataset over the years?
+SELECT year, COUNT(*) AS total_medals
+FROM athlete_info
+GROUP BY year
+ORDER BY year;
+
+-- 9. Who is the most participating athlete in the dataset?
+SELECT athletes, COUNT(*) AS participation
+FROM athlete_info
+GROUP BY athletes
+ORDER BY participation DESC
 LIMIT 1;
 
--- 4. What is the film with the least audience score in the dataset?
-SELECT film, audience_score
-FROM hollywood_db_table
-ORDER BY audience_score ASC
-LIMIT 1;
-
--- 5. What is the genre with the lowest audience score in the dataset?
-SELECT genre, audience_score
-FROM hollywood_db_table
-ORDER BY audience_score ASC
-LIMIT 1;
-
--- 6. What is the genre with the most audience score in the dataset?
-SELECT genre, audience_score
-FROM hollywood_db_table
-ORDER BY audience_score DESC
-LIMIT 1;
-
--- 7. What year was the film with the most profitability released?
-SELECT year, film, profitability
-FROM hollywood_db_table
-ORDER BY profitability DESC
-LIMIT 1;
-
--- 8. What genre has the most profitability?
-SELECT genre, SUM(profitability) AS total_profitability
-FROM hollywood_db_table
-GROUP BY genre
-ORDER BY total_profitability DESC
-LIMIT 1;
-
--- 9. What movie has the highest gross revenue in the dataset?
-SELECT film, MAX(worldwide_gross) AS highest_gross_revenue
-FROM hollywood_db_table;
-
--- 10. What lead studio has the highest Rotten Tomatoes rating?
-SELECT lead_studio, MAX(rotten_tomatoes_rating) AS highest_rating
-FROM hollywood_db_table
-GROUP BY lead_studio
-ORDER BY highest_rating DESC
-LIMIT 1;
+-- 10. How many athletes in the dataset are above the age of 30?
+SELECT COUNT(*) AS athletes_above_30
+FROM athlete_info
+WHERE age > 30;
 ```
