@@ -1,5 +1,6 @@
 For this SQL project i will be answering 10 questions from this dataset
 #I will start by introducing the table
+```sql
 -- Use the appropriate database
 USE hollywood_db;
 
@@ -68,3 +69,4 @@ FROM hollywood_db_table
 GROUP BY lead_studio
 ORDER BY highest_rating DESC
 LIMIT 1;
+```
